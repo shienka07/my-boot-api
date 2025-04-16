@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: boot-api
+# 프로필 설정
+  profiles:
+    active: dev
