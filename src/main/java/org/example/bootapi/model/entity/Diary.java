@@ -16,6 +16,7 @@ public class Diary {
     private String title;
     @Column(nullable = false, length = 2000)
     private String content;
+    // Nullable
     private String filename;
     @CreatedDate
     private LocalDateTime createdAt = LocalDateTime.now();

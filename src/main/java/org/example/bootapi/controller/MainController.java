@@ -1,3 +1,4 @@
+
 package org.example.bootapi.controller;
 
 import lombok.RequiredArgsConstructor;
@@ -22,14 +23,10 @@ public class MainController {
     private final StorageService storageService;
     private final DiaryService diaryService;
 
-//    public MainController(StorageService storageService) {
-//        this.storageService = storageService;
-//    }
-
     @GetMapping
     public String index(Model model) throws Exception {
-        model.addAttribute("message", "밤피카츄 언제와");
-        model.addAttribute("message", "누가 교환좀 해줘라!!");
+        model.addAttribute("title", "밤피카츄 구합니다!");
+        model.addAttribute("message", "제발요!");
         model.addAttribute("form", DiaryForm.empty());
         model.addAttribute("list", diaryService.getAllDiaryList());
         return "index";

@@ -10,6 +10,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
 import java.util.UUID;
@@ -33,7 +34,7 @@ public class StorageServiceImpl implements StorageService {
         String filename = "%s.%s".formatted(uuid, extension);
         // 주의 : 스프링 내장 HttpRequest도 나쁘지 않지만... Java 내장.
         HttpRequest request = HttpRequest.newBuilder()
-                //                .uri(URI.create(url))
+//                .uri(URI.create(url))
                 .uri(URI.create("%s/storage/v1/object/%s/%s"
                         .formatted(url, bucketName, filename)))
                 .header("Authorization", "Bearer %s".formatted(accessKey))
@@ -57,7 +58,6 @@ public class StorageServiceImpl implements StorageService {
         );
         return HttpRequest.BodyPublishers.ofByteArrays(byteArrays);
     }
-
 
     public byte[] download(String filename) throws Exception{
         HttpRequest request = HttpRequest.newBuilder()
