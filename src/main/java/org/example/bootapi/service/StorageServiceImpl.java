@@ -57,4 +57,20 @@ public class StorageServiceImpl implements StorageService {
         );
         return HttpRequest.BodyPublishers.ofByteArrays(byteArrays);
     }
+
+
+    public byte[] download(String filename) throws Exception{
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("%s/storage/v1/object/%s/%s".formatted(url, bucketName, filename)))
+                .header("Authorization", "Bearer %s".formatted(accessKey))
+                .GET()
+                .build();
+
+        HttpResponse<byte[]> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofByteArray());
+
+        if (response.statusCode() != 200) {
+            throw new Exception("뭔가 크게 잘못 되었다!");
+        }
+        return response.body(); // 바이너리 데이터 반환
+    }
 }
